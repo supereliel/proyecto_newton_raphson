@@ -32,12 +32,30 @@ def newton_raphson(f, x, ER, N):
     ER: cota mínima del error relativo.
     N: número máximo de iteraciones.
     """
-
-    print("Iteración:", i, "Aproximación:", xi, "Error:", err)
-
+    xi=x
+    contador=0
+    error=1000
+    b=False
+    while (b==False):
+    	ximas1=xi-(f(xi)/derivada(f)(xi))
+    	if contador>0:
+    		error=abs((ximas1-xi)/ximas1)
+    		xi=ximas1
+    	else:
+    		xi=ximas1
+    	if contador==0:
+    		print("Iteración:", contador, "Aproximación:", xi)
+    	else:
+    		print("Iteración:", contador, "Aproximación:", xi, "Error:", error)
+    	contador=contador+1	
+    	if error<ER:
+    		b=True
+    	if contador>N:
+    		b=True
     return xi
 
 
 if __name__ == "__main__":
     # Pruebe aquí su función.
-    pass
+    f=lambda x:(math.e)**x-3*(x**2)
+    newton_raphson(f,0.5,0.02,100)
