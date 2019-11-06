@@ -35,7 +35,8 @@ def newton_raphson(f, x, ER, N):
     xi=x
     contador=0
     error=1000
-    while (contador<N)&(error>ER):
+    b=False
+    while (b==False):
     	ximas1=xi-(f(xi)/derivada(f)(xi))
     	if contador>0:
     		error=abs((ximas1-xi)/ximas1)
@@ -47,6 +48,10 @@ def newton_raphson(f, x, ER, N):
     	else:
     		print("Iteración:", contador, "Aproximación:", xi, "Error:", error)
     	contador=contador+1	
+    	if error<ER:
+    		b=True
+    	if contador>N:
+    		b=True
     return xi
 
 
