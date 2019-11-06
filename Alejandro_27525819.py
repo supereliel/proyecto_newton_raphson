@@ -51,5 +51,5 @@ def newton_raphson(f, x, ER, N):
 
 if __name__ == "__main__":
     # Pruebe aquí su función.
-    print (newton_raphson(f,,0.02,10))
-    pass
+    print (newton_raphson(f,0.5,0.02,10))
+ 
