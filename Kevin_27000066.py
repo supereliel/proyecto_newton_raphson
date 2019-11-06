@@ -21,23 +21,35 @@ def derivada(f, h = 0.02):
 
     return _
 
+i = 0    
+err = 0
+xi = 0
+d = None
+
 def newton_raphson(f, x, ER, N):
-    """
-    Implementa el Algoritmo de Newton-Raphson y retorna la aproximación de la
-    raiz.
+    global i
+    global err
+    global xi
+    global d
+    ap = 0
 
-    Parámetros:
-    f: función de variable real f(x).
-    x: aproximación inicial.
-    ER: cota mínima del error relativo.
-    N: número máximo de iteraciones.
-    """
+    if(i == 0):
+        err = ER +1
+        xi = x
+        d = derivada(f)
 
-    print("Iteración:", i, "Aproximación:", xi, "Error:", err)
-
-    return xi
-
+    if(i <= N and err > ER):
+        ap = xi - (f(xi) / d(xi))
+        err = abs((ap - xi) / ap)
+        xi = ap
+        i += 1
+        print("Iteración:", i, "Aproximación:", xi, "Error:", err)
+        return newton_raphson(f,x, ER, N) 
+    else:
+        return xi
 
 if __name__ == "__main__":
     # Pruebe aquí su función.
+    fc = lambda x: math.exp(x) - ( 3 * pow(x,2))
+    print("Aproximacion: ", newton_raphson(fc,0.5,0.02,10))
     pass
