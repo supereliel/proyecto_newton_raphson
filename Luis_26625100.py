@@ -33,11 +33,31 @@ def newton_raphson(f, x, ER, N):
     N: número máximo de iteraciones.
     """
 
-    print("Iteración:", i, "Aproximación:", xi, "Error:", err)
+    i = 0
+    lastAprox = x
+    currentAprox = 0.0
 
-    return xi
+    getCurrentAprox = lambda: lastAprox - (f(lastAprox)/derivada(f)(lastAprox))
+    getRelativeError = lambda: abs((currentAprox - lastAprox)/currentAprox)
+
+    while(i <= N):
+        i += 1
+        currentAprox = getCurrentAprox()
+        error = getRelativeError()
+        lastAprox = currentAprox
+
+        print("Iteración:", i, "Aproximación:", currentAprox, "Error:", error)
+
+        if(error < ER):
+            print("El error relativo aproximado de:", ER, "para la funcion:", 0, "es de:", error)
+            return currentAprox
+    else:
+        print("Se ha alcanzado el litmite de iteraciones.")
+        return currentAprox
 
 
 if __name__ == "__main__":
-    # Pruebe aquí su función.
+
+    f = lambda x: math.sin(x) - math.exp(-x)
+    print("La aproximacion para la raiz de la funcion:", 0, "es de:", newton_raphson(f, 3.5, 0.035, 10))
     pass
